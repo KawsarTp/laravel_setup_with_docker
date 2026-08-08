@@ -1,58 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Docker Development Environment
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel application running completely inside Docker.
 
-## About Laravel
+This project uses:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Laravel
+- PHP 8.4
+- PHP-FPM
+- Nginx
+- MySQL 8.4
+- Composer
+- Docker Compose
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The goal of this setup is to provide a consistent development environment for every developer in the team.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+# Table of Contents
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. [Requirements](#1-requirements)
+2. [Architecture](#2-architecture)
+3. [Project Structure](#3-project-structure)
+4. [Clone the Project](#4-clone-the-project)
+5. [Environment Configuration](#5-environment-configuration)
+6. [Docker Configuration](#6-docker-configuration)
+7. [First Time Installation](#7-first-time-installation)
+8. [Start the Application](#8-start-the-application)
+9. [Access the Application](#9-access-the-application)
+10. [Database Configuration](#10-database-configuration)
+11. [Laravel Artisan Commands](#11-laravel-artisan-commands)
+12. [Composer Commands](#12-composer-commands)
+13. [Docker Commands](#13-docker-commands)
+14. [View Logs](#14-view-logs)
+15. [Access Containers](#15-access-containers)
+16. [File Permissions](#16-file-permissions)
+17. [Rebuilding Docker Images](#17-rebuilding-docker-images)
+18. [Database Reset](#18-database-reset)
+19. [Troubleshooting](#19-troubleshooting)
+20. [Daily Development Workflow](#20-daily-development-workflow)
+21. [Git Workflow](#21-git-workflow)
+22. [New Developer Setup](#22-new-developer-setup)
+23. [Important Docker Concepts](#23-important-docker-concepts)
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+# 1. Requirements
 
-## Agentic Development
+Only the following software is required on the host machine:
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+- Docker
+- Docker Compose
+- Git
+
+You DO NOT need to install the following directly on your machine:
+
+- PHP
+- Composer
+- MySQL
+- Nginx
+
+All of them are provided by Docker.
+
+---
+
+## Check Docker
+
+Run:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
-```
-
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+docker --version
