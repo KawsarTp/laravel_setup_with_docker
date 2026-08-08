@@ -308,11 +308,7 @@ FROM php:8.4-fpm
 
 WORKDIR /var/www/html
 
-
-# --------------------------------------------------
 # Install system dependencies
-# --------------------------------------------------
-
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         git \
@@ -327,11 +323,7 @@ RUN apt-get update \
         libcurl4-openssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
-
-# --------------------------------------------------
 # Install PHP extensions
-# --------------------------------------------------
-
 RUN docker-php-ext-configure intl \
     && docker-php-ext-install \
         pdo \
@@ -345,45 +337,11 @@ RUN docker-php-ext-configure intl \
         bcmath \
         opcache
 
-
-# --------------------------------------------------
 # Install Composer
-# --------------------------------------------------
-
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-
-# --------------------------------------------------
 # Configure temporary directory
-# --------------------------------------------------
-
 RUN chmod 1777 /tmp
-
-
-# --------------------------------------------------
-# Create Laravel writable directories
-# --------------------------------------------------
-
-RUN mkdir -p \
-        /var/www/html/storage/framework/cache \
-        /var/www/html/storage/framework/sessions \
-        /var/www/html/storage/framework/views \
-        /var/www/html/storage/logs \
-        /var/www/html/bootstrap/cache
-
-
-# --------------------------------------------------
-# Set permissions
-# --------------------------------------------------
-
-RUN chown -R www-data:www-data \
-        /var/www/html/storage \
-        /var/www/html/bootstrap/cache
-
-
-# --------------------------------------------------
-# Start PHP-FPM
-# --------------------------------------------------
 
 CMD ["php-fpm"]
 ```
